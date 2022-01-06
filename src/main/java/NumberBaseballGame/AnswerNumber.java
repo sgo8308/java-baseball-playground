@@ -1,5 +1,7 @@
 package NumberBaseballGame;
 
+import java.util.Random;
+
 public class AnswerNumber {
 
     private final int answerNum;
@@ -9,7 +11,21 @@ public class AnswerNumber {
     }
 
     public static AnswerNumber createAnswerNumber() {
-        return null;
+        Random random = new Random();
+        int answerNumber =
+                random.ints(100, 1000)
+                        .filter(x -> is3differentNumber(x))
+                        .findAny()
+                        .getAsInt();
+        return new AnswerNumber(answerNumber);
+    }
+
+    private static boolean is3differentNumber(int number) {
+        int numAtHundredsDigit = number / 100;
+        int numAtTensDigit = (number % 100) / 10;
+        int numAtUnitDigit = number % 10;
+        return numAtHundredsDigit != numAtUnitDigit && numAtHundredsDigit != numAtTensDigit
+                && numAtTensDigit != numAtUnitDigit;
     }
 
     public Score calculateScore(int number) {
