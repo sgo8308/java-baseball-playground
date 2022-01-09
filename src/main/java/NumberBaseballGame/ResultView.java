@@ -2,7 +2,7 @@ package NumberBaseballGame;
 
 public class ResultView {
 
-    public void printResult(Score score) {
+    public void printResult(ResultType[] results) {
 
     }
 }
