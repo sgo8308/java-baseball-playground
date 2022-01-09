@@ -2,28 +2,51 @@ package NumberBaseballGame;
 
 public class NumberBaseBallGameApplication {
 
+    static ResultView resultView = new ResultView();
+    static InputView inputView = new InputView(resultView);
+    static AnswerNumbers answerNumbers;
+    static Referee referee;
+
     public static void main(String[] args) {
-        while (true) {
-            AnswerNumbers answerNumbers = AnswerNumbers.createAnswerNumber();
+        start();
+    }
 
-            System.out.print("숫자를 입력해주세요 : ");
+    private static void start() {
+        answerNumbers = AnswerNumbers.createAnswerNumber();
 
-            ResultView resultView = new ResultView();
-            InputView inputView = new InputView(resultView);
-            PlayerNumbers playerNumbers = new PlayerNumbers(inputView.getInput());
+        boolean isPlayerWin = false;
+        while (!isPlayerWin) {
+            resultView.print(OutputType.NEW_INPUT);
 
-            Referee referee = new Referee(answerNumbers, playerNumbers);
+            PlayerNumbers playerNumbers = new PlayerNumbers(inputView.inputPlayerNumber());
+
+            referee = new Referee(answerNumbers, playerNumbers);
             referee.writeResults();
 
-            resultView.print(referee.resultsToString());
+            resultView.println(referee.resultsToString());
 
-            if (referee.is3strike()) {
-                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-                int select = inputView.getInput();
-                if (select == 2) {
-                    break;
-                }
-            }
+            handleResult(referee.is3strike());
         }
+    }
+
+    private static void handleResult(boolean is3strike) {
+        if (is3strike) {
+            resultView.print(OutputType.USER_WIN);
+
+            restartOrQuit();
+        }
+    }
+
+    private static void restartOrQuit() {
+        int select = inputView.inputPlayerSelection();
+        if (select == 2) {
+            System.exit(0);
+        }
+
+        restart();
+    }
+
+    private static void restart() {
+        answerNumbers = AnswerNumbers.createAnswerNumber();
     }
 }

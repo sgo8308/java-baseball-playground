@@ -12,10 +12,21 @@ public class InputView {
 
     private Scanner sc = new Scanner(System.in);
 
-    public int getInput() {
+    public int inputPlayerNumber() {
         int number = sc.nextInt();
         number = getInputUntilValidateNumber(number);
         return number;
+    }
+
+    public int inputPlayerSelection() {
+        resultView.print(OutputType.RESTART_OR_QUIT);
+        int select = sc.nextInt();
+        while (select != 1 && select != 2) {
+            resultView.print(OutputType.RESTART_OR_QUIT);
+            select = sc.nextInt();
+        }
+
+        return select;
     }
 
     private int getInputUntilValidateNumber(int number) {
