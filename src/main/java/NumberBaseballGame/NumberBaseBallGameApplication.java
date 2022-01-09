@@ -8,13 +8,13 @@ public class NumberBaseBallGameApplication {
 
             System.out.print("숫자를 입력해주세요 : ");
 
-            InputView inputView = new InputView();
+            ResultView resultView = new ResultView();
+            InputView inputView = new InputView(resultView);
             PlayerNumbers playerNumbers = new PlayerNumbers(inputView.getInput());
 
             Referee referee = new Referee(answerNumbers, playerNumbers);
             ResultType[] results = referee.writeResults();
 
-            ResultView resultView = new ResultView();
             resultView.printResult(results);
 
             if (referee.is3strike()) {

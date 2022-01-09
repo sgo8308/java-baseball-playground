@@ -6,12 +6,10 @@ import java.util.Random;
 
 public class AnswerNumbers {
 
-    private final Integer[] numbers = new Integer[3];
+    private Integer[] numbers;
 
     private AnswerNumbers(int number) {
-        numbers[0] = NumberParser.getNumAtHundredsDigit(number);
-        numbers[1] = NumberParser.getNumAtTensDigit(number);
-        numbers[2] = NumberParser.getNumAtUnitDigit(number);
+        numbers = NumberHandler.seperateNumberByNumberPlace(number);
     }
 
     public static AnswerNumbers createAnswerNumber() {
@@ -19,7 +17,7 @@ public class AnswerNumbers {
         String answerNumber = "";
 
         for (int i = 0; i < 3; i++) {
-            int num = getNonDuplicateNum(nums);
+            int num = getNumberNotIn(nums);
             answerNumber += num;
             nums.add(num);
         }
@@ -27,7 +25,7 @@ public class AnswerNumbers {
         return new AnswerNumbers(Integer.parseInt(answerNumber));
     }
 
-    private static int getNonDuplicateNum(ArrayList<Integer> nums) {
+    private static int getNumberNotIn(ArrayList<Integer> nums) {
         Random random = new Random();
         int num = random.nextInt(9) + 1;
 
