@@ -20,7 +20,8 @@ public class InputView {
 
     private int getInputUntilValidateNumber(int number) {
         while (!NumberHandler.isValidate(number)) {
-            resultView.printRuleAndRequestNewInput();
+            resultView.print(OutputType.RULE);
+            resultView.print(OutputType.NEW_INPUT);
             number = sc.nextInt();
         }
         return number;

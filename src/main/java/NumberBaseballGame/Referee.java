@@ -46,4 +46,31 @@ public class Referee {
         return Arrays.stream(results)
                 .allMatch(result -> result == ResultType.STRIKE);
     }
+
+    public String resultsToString() {
+        String message = "";
+        int ballCount = countOf(ResultType.BALL);
+
+        if (ballCount > 0) {
+            message += ballCount + "볼 ";
+        }
+
+        int strikeCount = countOf(ResultType.STRIKE);
+
+        if (strikeCount > 0) {
+            message += strikeCount + "스트라이크";
+        }
+
+        if (message.equals("")) {
+            message = "4볼";
+        }
+
+        return message;
+    }
+
+    private int countOf(ResultType resultType) {
+        return (int) Arrays.stream(results)
+                .filter(result -> result == resultType)
+                .count();
+    }
 }

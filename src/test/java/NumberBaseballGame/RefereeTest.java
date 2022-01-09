@@ -97,6 +97,51 @@ class RefereeTest {
         assertThat(is3strike).isFalse();
     }
 
+    @Test
+    public void resultsToString_When1ball1strike_1볼_1스트라이크() throws Exception {
+        //given
+        AnswerNumbers answerNumbers = getAnswerNumbers(1, 2, 3);
+        PlayerNumbers playerNumbers = new PlayerNumbers(253);
+        Referee referee = new Referee(answerNumbers, playerNumbers);
+
+        //when
+        referee.writeResults();
+        String s = referee.resultsToString();
+
+        //then
+        assertThat(s).isEqualTo("1볼 1스트라이크");
+    }
+
+    @Test
+    public void resultsToString_When1strike_1스트라이크() throws Exception {
+        //given
+        AnswerNumbers answerNumbers = getAnswerNumbers(1, 2, 3);
+        PlayerNumbers playerNumbers = new PlayerNumbers(753);
+        Referee referee = new Referee(answerNumbers, playerNumbers);
+
+        //when
+        referee.writeResults();
+        String s = referee.resultsToString();
+
+        //then
+        assertThat(s).isEqualTo("1스트라이크");
+    }
+
+    @Test
+    public void resultsToString_When4ball_4볼() throws Exception {
+        //given
+        AnswerNumbers answerNumbers = getAnswerNumbers(1, 2, 3);
+        PlayerNumbers playerNumbers = new PlayerNumbers(987);
+        Referee referee = new Referee(answerNumbers, playerNumbers);
+
+        //when
+        referee.writeResults();
+        String s = referee.resultsToString();
+
+        //then
+        assertThat(s).isEqualTo("4볼");
+    }
+
     private AnswerNumbers getAnswerNumbers(int num1, int num2, int num3)
             throws NoSuchFieldException, IllegalAccessException {
         AnswerNumbers answerNumber = AnswerNumbers.createAnswerNumber();
@@ -108,4 +153,6 @@ class RefereeTest {
         answerNumbers[2] = num3;
         return answerNumber;
     }
+
+
 }
