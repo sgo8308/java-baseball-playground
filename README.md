@@ -56,3 +56,4 @@ ex) git checkout -b apply-feedback
 - OutputView : 화면 출력하기
     - OutputType : 출력 종류
 - Application : 게임의 전체적인 진행
+- ValidationUtils : 숫자가 유효한지 판단
