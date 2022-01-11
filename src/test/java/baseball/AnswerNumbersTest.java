@@ -3,30 +3,29 @@ package baseball;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import baseball.domain.AnswerNumbers;
-import baseball.domain.NumberPosition;
 import baseball.utils.ValidationUtils;
+import java.lang.reflect.Field;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 
 class AnswerNumbersTest {
 
     AnswerNumbers answerNumbers;
-    Integer[] answerNumbersArray;
+    List<Integer> answerNumbersList;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
         answerNumbers = AnswerNumbers.createAnswerNumbers();
-        int firstNumber = answerNumbers.getNumberAt(NumberPosition.FIRST);
-        int secondNumber = answerNumbers.getNumberAt(NumberPosition.SECOND);
-        int thirdNumber = answerNumbers.getNumberAt(NumberPosition.THIRD);
-        answerNumbersArray = new Integer[]{firstNumber, secondNumber, thirdNumber};
+        setAnswerNumbersList();
     }
+
 
     @RepeatedTest(100)
     void createAnswerNumber_AllNumberHaveToBeInRangeFrom1to9() {
         //when
         boolean isAllNumberInRightRange = ValidationUtils.isAllNumberInRightRange(
-                answerNumbersArray);
+                answerNumbersList);
 
         //then
         assertThat(isAllNumberInRightRange).isTrue();
@@ -35,9 +34,15 @@ class AnswerNumbersTest {
     @RepeatedTest(100)
     void createAnswerNumber_AllNumberHaveToBeDifferentEachOther() {
         //when
-        boolean isAllNumberDifferent = ValidationUtils.isAllNumberDifferent(answerNumbersArray);
+        boolean isAllNumberDifferent = ValidationUtils.isAllNumberDifferent(answerNumbersList);
 
         //then
         assertThat(isAllNumberDifferent).isTrue();
+    }
+
+    void setAnswerNumbersList() throws Exception {
+        Field field = answerNumbers.getClass().getDeclaredField("numbers");
+        field.setAccessible(true);
+        answerNumbersList = (List<Integer>) field.get(answerNumbers);
     }
 }
