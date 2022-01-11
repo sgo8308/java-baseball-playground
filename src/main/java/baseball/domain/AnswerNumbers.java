@@ -1,6 +1,7 @@
 package baseball.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -30,7 +31,22 @@ public class AnswerNumbers {
         }
     }
 
-    public int getNumberAt(NumberPosition position) {
+    public boolean isStrike(NumberPosition position, int playerNumber) {
+        return this.getNumberAt(position) == playerNumber;
+    }
+
+    public boolean isBall(NumberPosition position, int playerNumber) {
+        return numbers.contains(playerNumber) && this.positionOf(playerNumber) != position;
+    }
+
+    private NumberPosition positionOf(int number) {
+        return Arrays.stream(NumberPosition.values())
+                .filter(position -> this.getNumberAt(position) == number)
+                .findAny()
+                .orElse(null);
+    }
+
+    private int getNumberAt(NumberPosition position) {
         return numbers.get(position.getValue());
     }
 }
