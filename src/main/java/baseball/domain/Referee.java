@@ -2,7 +2,10 @@ package baseball.domain;
 
 public class Referee {
 
-    public Results score(AnswerNumbers answerNumbers, PlayerNumbers playerNumbers) {
+    private Referee() {
+    }
+
+    public static Results score(AnswerNumbers answerNumbers, PlayerNumbers playerNumbers) {
         int strikeCount = 0;
         int ballCount = 0;
         for (NumberPosition position : NumberPosition.values()) {
@@ -13,7 +16,7 @@ public class Referee {
         return new Results(ballCount, strikeCount);
     }
 
-    private int countBall(AnswerNumbers answerNumbers, PlayerNumbers playerNumbers,
+    private static int countBall(AnswerNumbers answerNumbers, PlayerNumbers playerNumbers,
             NumberPosition position) {
 
         if (answerNumbers.isBall(position, playerNumbers.getNumberAt(position))) {
@@ -22,7 +25,7 @@ public class Referee {
         return 0;
     }
 
-    private int countStrike(AnswerNumbers answerNumbers, PlayerNumbers playerNumbers,
+    private static int countStrike(AnswerNumbers answerNumbers, PlayerNumbers playerNumbers,
             NumberPosition position) {
 
         if (answerNumbers.isStrike(position, playerNumbers.getNumberAt(position))) {

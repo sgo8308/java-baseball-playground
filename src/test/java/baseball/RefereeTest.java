@@ -9,19 +9,10 @@ import baseball.domain.Results;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class RefereeTest {
-
-    Referee referee;
-
-    @BeforeEach
-    void setUp() {
-        referee = new Referee();
-    }
-
     @ParameterizedTest
     @CsvSource({"1,2,3,3스트라이크", "3,1,2,3볼", "1,3,5,1볼 1스트라이크", "4,5,6,낫싱"})
     void score_WhenAnswerNumberIs123(int playerFirstNumber, int playerSecondNumber,
@@ -34,7 +25,7 @@ class RefereeTest {
                 Arrays.asList(playerFirstNumber, playerSecondNumber, playerthirdNumber));
 
         //when
-        Results results = referee.score(answerNumbers, playerNumbers);
+        Results results = Referee.score(answerNumbers, playerNumbers);
 
         //then
         assertThat(results).hasToString(expected);
