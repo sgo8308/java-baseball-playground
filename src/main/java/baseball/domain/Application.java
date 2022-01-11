@@ -15,9 +15,7 @@ public class Application {
         while (!isEnd) {
             OutputView.print("숫자를 입력해주세요 : ");
             int number = InputView.getInput();
-            Integer[] numbers = {Integer.parseInt(("" + number).substring(0, 1)),
-                    Integer.parseInt(("" + number).substring(1, 2)),
-                    Integer.parseInt(("" + number).substring(2, 3))};
+            Integer[] numbers = numberToArray(number);
             PlayerNumbers playerNumbers = new PlayerNumbers(Arrays.asList(numbers));
 
             Results result = Referee.score(answerNumbers, playerNumbers);
@@ -26,6 +24,12 @@ public class Application {
 
             isEnd = processResults(result);
         }
+    }
+
+    private static Integer[] numberToArray(int number) {
+        return new Integer[]{Integer.parseInt(("" + number).substring(0, 1)),
+                Integer.parseInt(("" + number).substring(1, 2)),
+                Integer.parseInt(("" + number).substring(2, 3))};
     }
 
     private static boolean processResults(Results result) {
