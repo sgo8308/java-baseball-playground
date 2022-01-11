@@ -31,4 +31,8 @@ public class Results {
         }
         return string;
     }
+
+    public boolean is3strike() {
+        return strikeCount == 3;
+    }
 }
