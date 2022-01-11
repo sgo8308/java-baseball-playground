@@ -3,6 +3,8 @@ package utils;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import baseball.utils.ValidationUtils;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -30,8 +32,8 @@ class ValidationUtilsTest {
     }
 
     @Test
-    void isAllNumberInRightRange_모든_숫자가_1부터_9사이에_있으면_True() throws Exception {
-        Integer[] numbers = {3, 5, 6};
+    void isAllNumberInRightRange_모든_숫자가_1부터_9사이에_있으면_True() {
+        List<Integer> numbers = Arrays.asList(3, 5, 6);
 
         //when
         boolean isAllNumberInRightRange = ValidationUtils.isAllNumberInRightRange(numbers);
@@ -41,8 +43,8 @@ class ValidationUtilsTest {
     }
 
     @Test
-    void isAllNumberInRightRange_숫자가_1개라도_1부터_9사이에_없으면_False() throws Exception {
-        Integer[] numbers = {3, 0, 6};
+    void isAllNumberInRightRange_숫자가_1개라도_1부터_9사이에_없으면_False() {
+        List<Integer> numbers = Arrays.asList(3, 0, 6);
 
         //when
         boolean isAllNumberInRightRange = ValidationUtils.isAllNumberInRightRange(numbers);
@@ -52,9 +54,9 @@ class ValidationUtilsTest {
     }
 
     @Test
-    void isAllNumberDifferent_모든_숫자가_다르면_True() throws Exception {
+    void isAllNumberDifferent_모든_숫자가_다르면_True() {
         //given
-        Integer[] numbers = {3, 1, 5};
+        List<Integer> numbers = Arrays.asList(3, 1, 5);
 
         //when
         boolean isAllNumberDifferent = ValidationUtils.isAllNumberDifferent(numbers);
@@ -64,9 +66,9 @@ class ValidationUtilsTest {
     }
 
     @Test
-    void isAllNumberDifferent_숫자가_하나라도_같으면_False() throws Exception {
+    void isAllNumberDifferent_숫자가_하나라도_같으면_False() {
         //given
-        Integer[] numbers = {3, 1, 1};
+        List<Integer> numbers = Arrays.asList(3, 1, 1);
 
         //when
         boolean isAllNumberDifferent = ValidationUtils.isAllNumberDifferent(numbers);

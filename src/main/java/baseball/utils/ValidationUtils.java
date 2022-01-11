@@ -1,6 +1,6 @@
 package baseball.utils;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class ValidationUtils {
@@ -12,12 +12,13 @@ public class ValidationUtils {
         return number >= 1 && number <= 9;
     }
 
-    public static boolean isAllNumberInRightRange(Integer[] numbers) {
-        return Arrays.stream(numbers).allMatch(ValidationUtils::isInRightRange);
+    public static boolean isAllNumberInRightRange(List<Integer> numbers) {
+        return numbers.stream().allMatch(ValidationUtils::isInRightRange);
     }
 
-    public static boolean isAllNumberDifferent(Integer[] numbers) {
-        return !Objects.equals(numbers[0], numbers[1]) && !Objects.equals(numbers[0], numbers[2])
-                && !Objects.equals(numbers[1], numbers[2]);
+    public static boolean isAllNumberDifferent(List<Integer> numbers) {
+        return !Objects.equals(numbers.get(0), numbers.get(1)) && !Objects.equals(numbers.get(0),
+                numbers.get(2))
+                && !Objects.equals(numbers.get(1), numbers.get(2));
     }
 }
